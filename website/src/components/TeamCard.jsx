@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { safeUrl, track } from "../lib/data";
 
 const SOCIALS = [
@@ -13,12 +13,15 @@ const SOCIALS = [
 // are shown. On touch screens (no hover) the colour photo, name and bar are always visible.
 export default function TeamCard({ member: m }) {
   const [loaded, setLoaded] = useState(false);
+  const [broken, setBroken] = useState(false);
+  // the photo may already be complete before React attaches onLoad (cached image): check once on mount
+  const imgRef = useCallback(el => { if (el && el.complete) { if (el.naturalWidth > 0) setLoaded(true); else setBroken(true); } }, []);
   const links = SOCIALS.map(([key, label, path]) => ({ key, label, path, url: safeUrl(m[key]) })).filter(l => l.url);
   return (
     <article className={`team-tile${links.length ? " has-links" : ""}`} tabIndex={0} aria-label={m.role ? `${m.name}, ${m.role}` : m.name}>
       <div className="team-photo">
-        {m.image_url
-          ? <img src={m.image_url} alt="" loading="lazy" decoding="async" className={loaded ? "loaded" : ""} onLoad={() => setLoaded(true)} />
+        {m.image_url && !broken
+          ? <img ref={imgRef} src={m.image_url} alt="" loading="lazy" decoding="async" className={loaded ? "loaded" : ""} onLoad={() => setLoaded(true)} onError={() => setBroken(true)} />
           : <div className="team-initials" aria-hidden="true">{m.initials || m.name.slice(0, 2).toUpperCase()}</div>}
       </div>
       <div className="team-overlay">
