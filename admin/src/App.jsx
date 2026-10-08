@@ -1312,6 +1312,10 @@ function MessagesPage() {
   const [fSource, setFSource] = useState("");
   const [fService, setFService] = useState("");
   const [fFrom, setFFrom] = useState("");
+  const [replyAccount, setReplyAccount] = useState("");
+  useEffect(() => {
+    dbList("settings", [Query.equal("key", "lead_reply_account")]).then(r => setReplyAccount((r.documents[0]?.value || "").trim())).catch(() => { });
+  }, []);
   const [toast, show] = useToast();
 
   const load = useCallback(async () => {
@@ -1371,6 +1375,18 @@ function MessagesPage() {
     const a = document.createElement("a");
     a.href = url; a.download = `leads-${new Date().toISOString().slice(0, 10)}.csv`; a.click();
     URL.revokeObjectURL(url);
+  };
+
+  // Reply links: To and Subject are filled in, the body is left empty for the admin to write.
+  // "From" is the mail account that is signed in (Gmail) / configured (mail app); a Gmail account can be preselected in Site Settings.
+  const replyLinks = m => {
+    const subject = `Re: Your ${m.form_type === "consultation" ? "consultation request" : "enquiry"} to Sky Wings Prime${m.service ? ` – ${m.service}` : ""}`;
+    const to = encodeURIComponent(m.email);
+    const su = encodeURIComponent(subject);
+    return {
+      gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${su}${replyAccount ? `&authuser=${encodeURIComponent(replyAccount)}` : ""}`,
+      app: `mailto:${m.email}?subject=${su}`,
+    };
   };
 
   const detailRow = (label, value) => value ? (
@@ -1456,8 +1472,10 @@ function MessagesPage() {
             </Field>
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
               <Btn onClick={async () => { if (await patch(msg.id, { notes })) show("Notes saved."); }} disabled={notes === (msg.notes || "")}>Save notes</Btn>
-              <a href={`mailto:${msg.email}?subject=${encodeURIComponent("Re: Your enquiry to Sky Wings Prime")}`}
-                style={{ display: "inline-flex", alignItems: "center", gap: 8, background: C.surface2, border: `1px solid ${C.border}`, color: C.text, borderRadius: 7, padding: "10px 20px", fontSize: 14, fontWeight: 600 }}>✉ Reply by email</a>
+              <a href={replyLinks(msg).gmail} target="_blank" rel="noopener noreferrer"
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, background: C.brand, border: `1px solid ${C.brand}`, color: "#07121a", borderRadius: 7, padding: "10px 20px", fontSize: 14, fontWeight: 700 }}>✉ Reply in Gmail</a>
+              <a href={replyLinks(msg).app}
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, background: C.surface2, border: `1px solid ${C.border}`, color: C.text, borderRadius: 7, padding: "10px 20px", fontSize: 14, fontWeight: 600 }}>✉ Open in mail app</a>
               {msg.whatsapp || msg.phone ? <a href={`https://wa.me/${(msg.whatsapp || msg.phone).replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer"
                 style={{ display: "inline-flex", alignItems: "center", gap: 8, background: C.surface2, border: `1px solid ${C.border}`, color: C.text, borderRadius: 7, padding: "10px 20px", fontSize: 14, fontWeight: 600 }}>💬 WhatsApp</a> : null}
             </div>
@@ -1662,7 +1680,8 @@ const SETTING_GROUPS = [
     ["address", "Office address", "232, Muhaisnah, Dubai, UAE"], ["business_hours", "Business hours", "Monday to Friday, 9:00 AM – 5:00 PM"],
     ["phone", "Main phone", "+971 50 527 3277"], ["email", "Public email", "info@..."],
     ["whatsapp_uae", "WhatsApp — UAE", "+971 50 527 3277"], ["whatsapp_sl", "WhatsApp — Sri Lanka (optional)", "+94 74 041 5234"],
-    ["privacy_email", "Privacy contact email", "info@..."] ] },
+    ["privacy_email", "Privacy contact email", "info@..."],
+    ["lead_reply_account", "Gmail account used for lead replies (optional)", "info@yourdomain.com"] ] },
   { title: "🔗 Social Links", note: "Leave blank to hide an icon (for example TikTok until it exists).", fields: [
     ["social_instagram", "Instagram URL", "https://www.instagram.com/..."], ["social_facebook", "Facebook URL", "https://www.facebook.com/..."],
     ["social_linkedin", "LinkedIn URL", "https://www.linkedin.com/company/..."], ["social_tiktok", "TikTok URL", "https://www.tiktok.com/@..."] ] },
