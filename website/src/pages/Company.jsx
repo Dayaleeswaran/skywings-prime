@@ -9,16 +9,16 @@ import { Query } from "../supabase";
 
 export function About({ s }) {
   useEffect(() => {
-    setSeo({ title: "About Sky Wings Prime | Marketing Strategy & Brand Consultancy in Dubai", description: "Sky Wings Prime is a Dubai-based independent marketing strategy and brand consultancy with an international perspective.", path: "/about" });
+    setSeo({ title: "About Sky Wings Prime | Marketing Strategy & Brand Consultancy in Dubai", description: "Sky Wings Prime is a Middle East-based independent marketing strategy and brand consultancy with an international perspective.", path: "/about" });
   }, []);
   return (
     <>
-      <PageHero eyebrow="About" title="Strategy Built to Elevate Brands." intro="Dubai-based marketing strategy and brand management with an international perspective." crumbs={[{ label: "About" }]} />
+      <PageHero eyebrow="About" title="Strategy Built to Elevate Brands." intro="Middle East-based marketing strategy and brand management with an international perspective." crumbs={[{ label: "About" }]} />
       <section className="section">
         <div className="container split">
           <div className="prose">
             <h2>Our Story</h2>
-            <p>Sky Wings Prime is a Dubai-based independent marketing strategy and brand consultancy offering tailored solutions for businesses seeking clarity, direction and refined market positioning.</p>
+            <p>Sky Wings Prime is a Middle East-based independent marketing strategy and brand consultancy offering tailored solutions for businesses seeking clarity, direction and refined market positioning.</p>
             <p>The consultancy operates with a focused, expert-led approach, delivering strategic marketing support designed to help brands grow sustainably in competitive environments.</p>
             <p>With international exposure through its association with Sky Wings Holdings in Sri Lanka, Sky Wings Prime brings cross-market insight across tourism, events and marketing-related sectors, with a strong understanding of regional and global business dynamics.</p>
           </div>

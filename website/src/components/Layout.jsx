@@ -64,7 +64,7 @@ export function Footer({ s, services, onCookieSettings }) {
           <div>
             <Link to="/" className="footer-wordmark" aria-label="Sky Wings Prime — home"><span>Sky Wings <em>Prime</em></span><small>Giving You Wings</small></Link>
             <p className="muted" style={{ marginTop: 18, maxWidth: 320 }}>
-              A Dubai-based marketing management company helping businesses strengthen their brand and build sustainable growth.
+              A Middle East-based marketing management company helping businesses strengthen their brand and build sustainable growth.
             </p>
             <div className="socials">
               {SOCIALS.map(([key, label, glyph]) => {

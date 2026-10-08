@@ -41,8 +41,8 @@ const org = {
 const crumbs = items => ({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: items.map((it, i) => ({ "@type": "ListItem", position: i + 1, name: it.name, item: SITE + it.path })) });
 
 const routes = [
-  { path: "/", title: "Sky Wings Prime | Marketing Management & Brand Strategy in Dubai", description: "Sky Wings Prime is a Dubai-based marketing management company helping businesses strengthen their brand, improve market positioning and build sustainable growth.", ld: [org] },
-  { path: "/about", title: "About Sky Wings Prime | Marketing Strategy & Brand Consultancy in Dubai", description: "Sky Wings Prime is a Dubai-based independent marketing strategy and brand consultancy with an international perspective." },
+  { path: "/", title: "Sky Wings Prime | Marketing Management & Brand Strategy in Dubai", description: "Sky Wings Prime is a Middle East-based marketing management company helping businesses strengthen their brand, improve market positioning and build sustainable growth.", ld: [org] },
+  { path: "/about", title: "About Sky Wings Prime | Marketing Strategy & Brand Consultancy in Dubai", description: "Sky Wings Prime is a Middle East-based independent marketing strategy and brand consultancy with an international perspective." },
   { path: "/services", title: "Marketing Services in Dubai | Sky Wings Prime", description: "Digital marketing, social media, branding, content, advertising, strategy and corporate marketing management from Sky Wings Prime in Dubai." },
   { path: "/work", title: "Work & Case Studies | Sky Wings Prime", description: "Client work and clearly labelled concept projects from Sky Wings Prime across branding, digital, social, campaigns and events." },
   { path: "/concept-lab", title: "Concept Lab | Sky Wings Prime", description: "Strategy in action: clearly labelled concept projects demonstrating Sky Wings Prime's marketing and brand thinking." },

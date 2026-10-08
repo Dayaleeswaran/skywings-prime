@@ -19,7 +19,7 @@ export default function Home({ s, services }) {
   useEffect(() => {
     setSeo({
       title: "Sky Wings Prime | Marketing Management & Brand Strategy in Dubai",
-      description: "Sky Wings Prime is a Dubai-based marketing management company helping businesses strengthen their brand, improve market positioning and build sustainable growth.",
+      description: "Sky Wings Prime is a Middle East-based marketing management company helping businesses strengthen their brand, improve market positioning and build sustainable growth.",
       path: "/",
       jsonLd: orgJsonLd(s),
     });
@@ -36,13 +36,13 @@ export default function Home({ s, services }) {
         <GrainOverlay />
         <div className="container">
           <span className="eyebrow">Strategy • Brand • Growth</span>
-          <SplitText as="h1" delay={0.1}>Strategy That Gives Your <em>Brand Wings.</em></SplitText>
-          <p className="lead">Sky Wings Prime is a Dubai-based marketing management company helping businesses strengthen their brand, improve market positioning and build sustainable growth through structured marketing, creative communication and strategic direction.</p>
+          <SplitText as="h1" delay={0.1}>Strategy That Gives Your <em><span className="c-blue">Brand</span> <span className="c-gold">Wings.</span></em></SplitText>
+          <p className="lead">Sky Wings Prime is a Middle East-based marketing management company helping businesses strengthen their brand, improve market positioning and build sustainable growth through structured marketing, creative communication and strategic direction.</p>
           <div className="btn-row" style={{ marginTop: 34 }}>
             <Magnetic strength={25}><Link to="/consultation" className="btn btn-primary">Request a Private Consultation</Link></Magnetic>
             <Magnetic strength={20}><Link to="/services" className="btn btn-ghost">Explore Our Services</Link></Magnetic>
           </div>
-          <p className="micro">Dubai | International Perspective</p>
+          <p className="micro">Middle East | International Perspective</p>
         </div>
         <ScrollIndicator />
       </section>
@@ -90,7 +90,7 @@ export default function Home({ s, services }) {
           <div>
             <span className="eyebrow">About</span>
             <h2>Clarity. Direction. Results.</h2>
-            <p className="lead">Sky Wings Prime is a Dubai-based marketing management company focused on helping businesses build stronger brands, improve market positioning and develop structured marketing strategies for long-term growth. With international exposure through its association with Sky Wings Holdings in Sri Lanka, the company combines regional understanding with a broader international business perspective.</p>
+            <p className="lead">Sky Wings Prime is a Middle East-based marketing management company focused on helping businesses build stronger brands, improve market positioning and develop structured marketing strategies for long-term growth. With international exposure through its association with Sky Wings Holdings in Sri Lanka, the company combines regional understanding with a broader international business perspective.</p>
             <Link to="/about" className="btn btn-primary" style={{ marginTop: 12 }}>About Sky Wings Prime</Link>
           </div>
           <div className="card">

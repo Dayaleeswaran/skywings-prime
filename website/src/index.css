@@ -409,3 +409,114 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="url"], i
 .logo-row span { font-family: var(--font-head); font-size: 24px; color: var(--muted); }
 .svc-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
 .svc-gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); }
+
+/* =====================================================================
+   LIGHT THEME — palette: white, blue, gold. Letters: black, blue, gold.
+   "-ink" shades are slightly deeper so small blue / gold text stays readable on white;
+   the bright #36A9E1 / #D6B25E are used for fills, lines and large accents.
+   ===================================================================== */
+:root {
+  --bg: #FFFFFF; --surface: #FFFFFF; --surface-2: #F3F8FC;
+  --text: #0B0F14; --muted: rgba(11, 15, 20, 0.7); --line: rgba(11, 15, 20, 0.1);
+  --blue: #36A9E1; --blue-ink: #1479AD; --gold: #D6B25E; --gold-ink: #8F6A12;
+  --shadow: 0 8px 28px rgba(20, 60, 90, 0.08);
+  color-scheme: light;
+}
+::-webkit-scrollbar-track { background: #fff; }
+.section.alt, .strip { background: var(--surface-2); }
+.eyebrow, .blue, .crumbs a:hover, .contact-list a:hover, .footer a:hover { color: var(--blue-ink); }
+.gold, .contact-list b, .faq summary::after, .footer h4 { color: var(--gold-ink); }
+.grad-text, .hero h1 em, .footer-wordmark em { background: linear-gradient(90deg, var(--blue-ink), var(--gold-ink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* buttons */
+.btn-ghost { color: var(--text); border-color: rgba(11, 15, 20, 0.28); }
+.btn-ghost:hover { border-color: var(--blue); background: rgba(54, 169, 225, 0.08); }
+
+/* announcement + header + nav */
+.announce { background: linear-gradient(90deg, var(--blue), var(--gold)); color: #0B0F14; }
+.header.scrolled { background: rgba(255, 255, 255, 0.92); border-bottom-color: var(--line); box-shadow: 0 4px 24px rgba(20, 60, 90, 0.06); }
+.nav a:not(.btn) { color: rgba(11, 15, 20, 0.75); }
+.nav a:hover, .nav a[aria-current="page"] { background: rgba(11, 15, 20, 0.05); }
+@media (min-width: 961px) {
+  .nav a:not(.btn):hover { color: var(--text); background: none !important; }
+  .nav a:not(.btn)[aria-current="page"] { color: var(--blue-ink); border-bottom-color: var(--blue); background: none !important; }
+}
+@media (max-width: 960px) {
+  .nav { background: rgba(255, 255, 255, 0.98); box-shadow: 0 16px 30px rgba(20, 60, 90, 0.12); }
+  .nav a[aria-current="page"] { color: var(--blue-ink); }
+}
+
+/* hero: soft blue + gold light on white */
+.fluid { background: #fff; }
+.fluid i { opacity: .55; }
+.fluid i:nth-child(1) { background: radial-gradient(circle, #8AD1F3, transparent 66%); }
+.fluid i:nth-child(2) { background: radial-gradient(circle, #F2DDA6, transparent 66%); opacity: .6; }
+.fluid i:nth-child(3) { background: radial-gradient(circle, #C4E6F8, transparent 66%); }
+.fluid::after { background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 40%, #fff 100%); }
+.particles { opacity: .6; }
+.grain { mix-blend-mode: multiply; opacity: .05; }
+.scroll-indicator-text { color: var(--text); }
+.hero .micro { color: var(--muted); }
+
+/* cards / panels */
+.card, .panel, .quote-panel, .services-panel { background: #fff; border-color: var(--line); box-shadow: var(--shadow); }
+a.card:hover, .card.hover:hover { border-color: var(--blue); }
+.card::after { background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(54, 169, 225, .14), transparent 70%); }
+.card .icon { background: rgba(54, 169, 225, .14); color: var(--blue-ink); }
+.card .more, .services-row:hover .services-row-title, .services-row:hover .services-row-arrow { color: var(--blue-ink); }
+.tag.concept { background: rgba(214, 178, 94, .2); color: var(--gold-ink); border-color: rgba(143, 106, 18, .45); }
+.tag.real { background: rgba(54, 169, 225, .14); color: var(--blue-ink); border-color: rgba(20, 121, 173, .45); }
+.step .num { -webkit-text-stroke: 1px var(--gold-ink); }
+.check-list li::before { color: var(--gold-ink); }
+.cta { background: linear-gradient(135deg, rgba(54, 169, 225, .14), rgba(214, 178, 94, .18)); }
+.stat-label::before { color: var(--blue-ink); }
+.pill-list li { background: #fff; box-shadow: 0 2px 10px rgba(20, 60, 90, 0.05); }
+.thumb { background: linear-gradient(135deg, rgba(54, 169, 225, .2), rgba(214, 178, 94, .25)); }
+
+/* forms */
+.field .err { color: #C62828; }
+.alert.error { background: rgba(198, 40, 40, .07); border-color: rgba(198, 40, 40, .35); color: #B71C1C; }
+.consent a, .prose a { color: var(--blue-ink); }
+.quote-form .field input, .quote-form .field textarea { border-bottom-color: rgba(11, 15, 20, .22); background: transparent; }
+.quote-form .field input:focus, .quote-form .field textarea:focus { border-bottom-color: var(--blue); }
+
+/* services page */
+.services-reel { background: var(--surface-2); box-shadow: var(--shadow); }
+.services-play { background: #fff; color: var(--text); border-color: var(--text); }
+.services-play:hover { background: var(--blue); border-color: var(--blue); color: #07121a; }
+.services-row { color: var(--text); }
+.services-row.skeleton { background: linear-gradient(90deg, #eef3f7 25%, #e3ebf1 50%, #eef3f7 75%); background-size: 200% 100%; }
+.quote-text { color: var(--muted); }
+.quote-btn, .profile-btn { background: #0B0F14; color: #fff; }
+.quote-btn:hover, .profile-btn:hover { color: #07121a; }
+.provide-num { -webkit-text-stroke: 1px rgba(11, 15, 20, .3); }
+.provide-item:hover .provide-num { -webkit-text-stroke-color: var(--blue); }
+.provide-title { color: var(--text); }
+.provide-desc { color: var(--muted); }
+
+/* team tiles: photo overlay text stays white (it sits on a dark gradient over the photo) */
+.team-tile { background: linear-gradient(135deg, #BFE3F6, #F0D9A0); box-shadow: var(--shadow); }
+.team-initials { color: rgba(11, 15, 20, .55); }
+.team-overlay h3 { color: #fff; }
+.team-overlay .role { color: #8AD6FA; }
+.logo-row img { filter: grayscale(1); opacity: .85; }
+.logo-row span { color: var(--muted); }
+
+/* footer */
+.footer { background: #EEF6FB; color: var(--text); border-top-color: var(--line); }
+.footer-wordmark span { color: var(--text); }
+.footer-wordmark small { color: var(--gold-ink); }
+.socials a:hover { color: var(--gold-ink); border-color: var(--gold); }
+
+/* floating bits */
+.wa-menu a:hover { background: rgba(11, 15, 20, .05); }
+.wa-menu, .cookie { box-shadow: 0 20px 60px rgba(20, 60, 90, 0.2); }
+.panel-logo img { box-shadow: 0 20px 50px rgba(20, 60, 90, .25); }
+
+/* hero headline accent: clean blue -> gold (no muddy middle); gold is brighter here because the text is large */
+.hero h1 em { background: linear-gradient(90deg, var(--blue-ink) 0%, var(--blue-ink) 42%, #B8891E 58%, #B8891E 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* hero accent words: each word keeps its own colour even when the line wraps */
+.hero h1 em { background: none; -webkit-text-fill-color: initial; color: inherit; }
+.c-blue { color: var(--blue-ink); }
+.c-gold { color: #B8891E; }

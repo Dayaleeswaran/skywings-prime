@@ -130,7 +130,7 @@ export function TransitionPanels() {
   const { transitioning } = useRouter();
   return (
     <div className="panels" aria-hidden="true">
-      {["#1b6f9c", "#36A9E1", "#0A0A0A"].map((c, i) => (
+      {["#36A9E1", "#D6B25E", "#FFFFFF"].map((c, i) => (
         <div key={i} className="panel-sweep" style={{ background: c, transform: transitioning ? "translateX(0)" : "translateX(-100%)", transitionDelay: `${i * 90}ms` }} />
       ))}
       <div className="panel-logo" style={{ opacity: transitioning ? 1 : 0 }}><img src="/logo.png" alt="" width="120" height="112" /></div>
