@@ -400,3 +400,12 @@ a.card:hover, .card.hover:hover { transform: perspective(1000px) rotateX(var(--r
 /* BLUE CURSOR: a normal arrow in the brand blue everywhere (text fields keep the usual text cursor) */
 html, body, a, button, summary, select, label, [role="button"] { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 2l7 19 2.8-7.2L20 11z' fill='%2336A9E1' stroke='white' stroke-width='1.6' stroke-linejoin='round'/></svg>") 3 2, default; }
 input[type="text"], input[type="email"], input[type="tel"], input[type="url"], input[type="search"], input[type="password"], textarea { cursor: text; }
+
+/* Clients strip + service gallery */
+.logo-row { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 28px 56px; }
+.logo-row li { display: flex; align-items: center; }
+.logo-row img { height: 48px; width: auto; max-width: 180px; object-fit: contain; filter: grayscale(1) brightness(1.4); opacity: .75; transition: filter .3s ease, opacity .3s ease; }
+.logo-row a:hover img, .logo-row li:hover img { filter: none; opacity: 1; }
+.logo-row span { font-family: var(--font-head); font-size: 24px; color: var(--muted); }
+.svc-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.svc-gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); }

@@ -630,12 +630,12 @@ function Dashboard({ counts, setTab }) {
 
   const stats = [
     { label: "Services", value: counts.services, icon: "◈", color: C.brand, tab: "services" },
-    { label: "Portfolio", value: counts.portfolio, icon: "⊡", color: "#A78BFA", tab: "portfolio" },
-    { label: "Blog Posts", value: counts.blog, icon: "⊞", color: "#34D399", tab: "blog" },
+    { label: "Work & Concepts", value: counts.portfolio, icon: "⊡", color: "#A78BFA", tab: "portfolio" },
+    { label: "Insights", value: counts.blog, icon: "⊞", color: "#34D399", tab: "blog" },
     { label: "Team Members", value: counts.team, icon: "◎", color: "#60A5FA", tab: "team" },
     { label: "Clients", value: counts.clients, icon: "▣", color: "#F472B6", tab: "clients" },
     { label: "Testimonials", value: counts.testimonials, icon: "✪", color: "#FBBF24", tab: "testimonials" },
-    { label: "Unread Messages", value: counts.unread, icon: "◻", color: counts.unread > 0 ? "#FCD34D" : C.muted, tab: "messages" },
+    { label: "Unread Leads", value: counts.unread, icon: "◻", color: counts.unread > 0 ? "#FCD34D" : C.muted, tab: "messages" },
   ];
   return (
     <div style={{ animation: "fadeUp 0.3s ease" }}>
@@ -681,7 +681,7 @@ function Dashboard({ counts, setTab }) {
 
       <Card style={{ marginBottom: 20 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-          <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 700 }}>📨 Messages — Last 7 Days</h3>
+          <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 700 }}>📨 New Leads — Last 7 Days</h3>
           <button onClick={() => setTab("messages")} style={{ background: "none", border: "none", color: C.brand, fontSize: 12, cursor: "pointer", fontWeight: 600 }}>View all →</button>
         </div>
         <div style={{ display: "flex", alignItems: "flex-end", gap: 8, height: 80 }}>
@@ -707,10 +707,10 @@ function Dashboard({ counts, setTab }) {
         <div style={{ padding: "16px 22px", display: "flex", flexWrap: "wrap", gap: 10 }}>
           {[
             { label: "＋ Add Service", tab: "services" },
-            { label: "＋ New Case Study", tab: "portfolio" },
-            { label: "＋ Write Blog Post", tab: "blog" },
+            { label: "＋ Add Project", tab: "portfolio" },
+            { label: "＋ Write Article", tab: "blog" },
             { label: "＋ Add Team Member", tab: "team" },
-            { label: "✉ View Messages", tab: "messages" },
+            { label: "✉ View Leads", tab: "messages" },
           ].map((a, i) => (
             <button key={i} onClick={() => setTab(a.tab)}
               style={{ background: C.surface2, border: `1px solid ${C.border}`, borderRadius: 7, padding: "9px 16px", fontSize: 12, color: C.muted, cursor: "pointer", fontWeight: 500, transition: "all 0.12s" }}
@@ -836,7 +836,7 @@ function ServicesPage() {
           <Field label="URL slug" hint="Used in /services/your-slug — leave blank to generate from the title"><Input value={form.slug} onChange={f("slug")} placeholder="digital-marketing-management" /></Field>
           <Field label="Short benefit statement"><Input value={form.subtitle} onChange={f("subtitle")} placeholder="One sentence shown on cards and the page hero" /></Field>
           <Field label="Description"><Textarea rows={3} value={form.description} onChange={f("description")} placeholder="Short description shown on services page..." /></Field>
-          <Field label="Animated Gallery Images" hint="Click to upload multiple images"><MultiImageUpload value={form.gallery} onChange={f("gallery")} onUploading={setSaving} /></Field>
+          <Field label="Gallery images" hint="Shown as a photo grid on the service page. Optional."><MultiImageUpload value={form.gallery} onChange={f("gallery")} onUploading={setSaving} /></Field>
           <Field label="What's included (deliverables)" hint="Comma separated"><Textarea rows={2} value={form.items} onChange={f("items")} placeholder="Brand Strategy, Brand Positioning" /></Field>
           <Field label="Business problems solved" hint="One per line (3–6)"><Textarea rows={4} value={form.problems} onChange={f("problems")} placeholder="Unclear positioning against competitors" /></Field>
           <Field label="SEO title"><Input value={form.seo_title} onChange={f("seo_title")} placeholder="Leave blank for the default" /></Field>
@@ -902,16 +902,16 @@ function PortfolioPage() {
     try {
       if (isNew) {
         const result = await dbInsert("portfolio", payload);
-        show("Case study added!");
+        show("Project added!");
         logActivity("CREATE", "portfolio", result.id, { title: form.title });
       } else {
         const result = await dbUpdate("portfolio", modal.id, payload);
-        show("Case study updated!");
+        show("Project updated!");
         logActivity("UPDATE", "portfolio", modal.id, { title: form.title });
       }
       load(); setModal(null);
     } catch (err) {
-      show("Error saving portfolio: " + err.message, "error");
+      show("Error saving project: " + err.message, "error");
     }
     setSaving(false);
   };
@@ -935,12 +935,12 @@ function PortfolioPage() {
     <div style={{ animation: "fadeUp 0.3s ease" }}>
       <Toast msg={toast.msg} type={toast.type} />
       {confirm && <ConfirmDialog msg={`Delete "${confirm.title}"?`} onConfirm={() => doDelete(confirm.id)} onCancel={() => setConfirm(null)} />}
-      <PageHeader title="Portfolio" subtitle={`${data.length} case studies · ${data.filter(p => p.visible).length} visible`}
-        action={<Btn onClick={openAdd}>＋ New Case Study</Btn>} />
+      <PageHeader title="Work & Concepts" subtitle={`${data.length} projects · ${data.filter(p => p.visible).length} visible`}
+        action={<Btn onClick={openAdd}>＋ Add Project</Btn>} />
 
       <Card noPad>
         {loading ? <div style={{ padding: 48, display: "flex", justifyContent: "center" }}><Spinner size={24} /></div>
-          : data.length === 0 ? <EmptyState icon="⊡" title="No case studies yet" sub="Showcase your best work." action={<Btn onClick={openAdd}>＋ Add Case Study</Btn>} />
+          : data.length === 0 ? <EmptyState icon="⊡" title="No projects yet" sub="Add real client work or clearly labelled concept projects." action={<Btn onClick={openAdd}>＋ Add Project</Btn>} />
             : <DataTable loading={false} headers={["Title", "Category", "Year", "Visible", "Actions"]}
               rows={data.map(p => [
                 <span style={{ fontWeight: 600, fontSize: 13 }}>{p.title}</span>,
@@ -986,7 +986,7 @@ function PortfolioPage() {
             
             <div style={{ flex: 1 }} />
             <Btn variant="ghost" onClick={() => setModal(null)}>Cancel</Btn>
-            <Btn onClick={doSave} loading={saving}>{modal === "add" ? "Add Case Study" : "Save"}</Btn>
+            <Btn onClick={doSave} loading={saving}>{modal === "add" ? "Add Project" : "Save"}</Btn>
           </div>
         </Modal>
       )}
@@ -1070,12 +1070,12 @@ function BlogPage() {
     <div style={{ animation: "fadeUp 0.3s ease" }}>
       <Toast msg={toast.msg} type={toast.type} />
       {confirm && <ConfirmDialog msg={`Delete "${confirm.title}"?`} onConfirm={() => doDelete(confirm.id)} onCancel={() => setConfirm(null)} />}
-      <PageHeader title="Blog Posts" subtitle={`${data.length} posts · ${data.filter(b => b.published).length} published`}
+      <PageHeader title="Insights" subtitle={`${data.length} articles · ${data.filter(b => b.published).length} published`}
         action={<Btn onClick={openAdd}>＋ New Post</Btn>} />
 
       <Card noPad>
         {loading ? <div style={{ padding: 48, display: "flex", justifyContent: "center" }}><Spinner size={24} /></div>
-          : data.length === 0 ? <EmptyState icon="⊞" title="No blog posts yet" sub="Share insights and grow your audience." action={<Btn onClick={openAdd}>＋ Write First Post</Btn>} />
+          : data.length === 0 ? <EmptyState icon="⊞" title="No articles yet" sub="Publish insights for smarter growth." action={<Btn onClick={openAdd}>＋ Write First Post</Btn>} />
             : <DataTable loading={false} headers={["Title", "Category", "Created", "Status", "Actions"]}
               rows={data.map(b => [
                 <span style={{ fontWeight: 600, fontSize: 13 }}>{b.title}</span>,
@@ -1094,7 +1094,7 @@ function BlogPage() {
       </Card>
 
       {modal !== null && (
-        <Modal title={modal === "add" ? "New Blog Post" : "Edit Post"} onClose={() => setModal(null)} wide>
+        <Modal title={modal === "add" ? "New Article" : "Edit Article"} onClose={() => setModal(null)} wide>
           <Field label="Title" required><Input value={form.title} onChange={f("title")} placeholder="Post Title" /></Field>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
             <Field label="Category"><Input value={form.category} onChange={f("category")} placeholder="Marketing Strategy, Brand Management, Digital Marketing..." /></Field>
@@ -1104,7 +1104,7 @@ function BlogPage() {
           </div>
           <Field label="Featured image"><ImageUpload value={form.featured_image} onChange={v => setForm(p => ({ ...p, featured_image: v }))} onUploading={setSaving} /></Field>
           <Field label="Excerpt" hint="Shown in listings"><Textarea rows={2} value={form.excerpt} onChange={f("excerpt")} placeholder="A brief summary of the post..." /></Field>
-          <Field label="Content"><RichTextEditor value={form.content} onChange={v => setForm(p => ({ ...p, content: v }))} placeholder="Write your full blog post content here..." /></Field>
+          <Field label="Content"><RichTextEditor value={form.content} onChange={v => setForm(p => ({ ...p, content: v }))} placeholder="Write the full article here..." /></Field>
           <Field label="SEO title"><Input value={form.seo_title} onChange={f("seo_title")} placeholder="Leave blank to use the article title" /></Field>
           <Field label="SEO meta description"><Textarea rows={2} value={form.seo_description} onChange={f("seo_description")} placeholder="Up to ~160 characters" /></Field>
           <Field label="Publish" hint="Published posts appear on the site from their publish date">
@@ -1116,7 +1116,7 @@ function BlogPage() {
           <div style={{ display: "flex", gap: 10, justifyContent: "flex-end", paddingTop: 16, borderTop: `1px solid ${C.border}` }}>
             <div style={{ flex: 1 }} />
             <Btn variant="ghost" onClick={() => setModal(null)}>Cancel</Btn>
-            <Btn onClick={doSave} loading={saving}>{modal === "add" ? "Create Post" : "Save Post"}</Btn>
+            <Btn onClick={doSave} loading={saving}>{modal === "add" ? "Create Article" : "Save Article"}</Btn>
           </div>
         </Modal>
       )}
@@ -2194,6 +2194,18 @@ export default function App() {
     try { await supabase.auth.signOut(); } catch (err) { /* ignore */ }
     setSession(null);
   };
+
+  // Sign out automatically after 30 minutes without activity.
+  useEffect(() => {
+    if (!session) return;
+    let timer;
+    const reset = () => { clearTimeout(timer); timer = setTimeout(() => { handleSignOut(); }, 30 * 60 * 1000); };
+    const events = ["mousemove", "keydown", "click", "scroll", "touchstart"];
+    events.forEach(e => window.addEventListener(e, reset, { passive: true }));
+    reset();
+    return () => { clearTimeout(timer); events.forEach(e => window.removeEventListener(e, reset)); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session]);
 
   if (loadingAuth) return (
     <div style={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: C.bg }}>

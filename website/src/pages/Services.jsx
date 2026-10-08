@@ -141,6 +141,11 @@ export function ServiceDetail({ slug, s, services, loading }) {
           <div className="btn-row" style={{ marginBottom: 56 }}>
             <Link to={`/consultation?service=${encodeURIComponent(service.title)}`} className="btn btn-primary">Request a Consultation</Link>
           </div>
+          {(service.gallery || []).filter(safeUrl).length > 0 && (
+            <div className="svc-gallery" style={{ marginBottom: 72 }}>
+              {service.gallery.filter(safeUrl).map((src, i) => <img key={i} src={src} alt={`${service.title} ${i + 1}`} loading="lazy" decoding="async" />)}
+            </div>
+          )}
           {service.description && (
             <div className="split" style={{ marginBottom: 72 }}>
               <div><span className="eyebrow">Overview</span><h2>What it is and who it helps</h2></div>

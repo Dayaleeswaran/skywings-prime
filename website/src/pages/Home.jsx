@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "../lib/router";
 import { FOCUS, INDUSTRIES, PRINCIPLES, PROCESS, TRUST_STRIP, VALUE, WHO } from "../lib/content";
-import { clean, orgJsonLd, setSeo, useRows } from "../lib/data";
+import { clean, orgJsonLd, safeUrl, setSeo, useRows } from "../lib/data";
 import { FaqList, FinalCta, SectionHead, Thumb } from "../components/Shared";
 import TeamCard from "../components/TeamCard";
 import StatsBand from "../components/Stats";
@@ -13,6 +13,7 @@ export default function Home({ s, services }) {
   const team = useRows("team_members", [Query.equal("visible", true), Query.orderAsc("sort_order"), Query.limit(8)]);
   const testimonials = useRows("testimonials", [Query.equal("visible", true), Query.orderAsc("sort_order"), Query.limit(6)]);
   const posts = useRows("blog_posts", [Query.equal("published", true), Query.orderDesc("published_at"), Query.limit(3)]);
+  const clients = useRows("clients", [Query.equal("visible", true), Query.orderAsc("sort_order"), Query.limit(24)]);
   const faqs = useRows("faqs", [Query.equal("visible", true), Query.orderAsc("sort_order"), Query.limit(8)]);
 
   useEffect(() => {
@@ -116,10 +117,25 @@ export default function Home({ s, services }) {
 
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="Industries" title="Experience Across Sectors" />
+          <SectionHead eyebrow="Industries" title="Industries We Focus On" />
           <ul className="pill-list">{INDUSTRIES.map(i => <li key={i}>{i}</li>)}</ul>
         </div>
       </section>
+
+      {clients.rows.length > 0 && (
+        <section className="section alt">
+          <div className="container">
+            <SectionHead eyebrow="Clients" title="Brands We Work With" center />
+            <ul className="logo-row">
+              {clients.rows.map(c => {
+                const url = safeUrl(c.website_url);
+                const face = c.logo_url ? <img src={c.logo_url} alt={c.name} loading="lazy" decoding="async" /> : <span>{c.name}</span>;
+                return <li key={c.id}>{url ? <a href={url} target="_blank" rel="noopener noreferrer" aria-label={c.name}>{face}</a> : face}</li>;
+              })}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {real.length > 0 && (
         <section className="section alt">
