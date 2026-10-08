@@ -1727,6 +1727,11 @@ function SettingsPage() {
   }, []);
 
   const save = async () => {
+    // a key figure needs BOTH a value and a label, otherwise the website hides it
+    for (const i of [1, 2, 3, 4]) {
+      const v = (form[`stat_${i}_value`] || "").trim(), l = (form[`stat_${i}_label`] || "").trim();
+      if ((v && !l) || (!v && l)) { show(`Key Figure ${i} needs both a value and a label (or clear both).`, "error"); return; }
+    }
     setSaving(true);
     try {
       const today = new Date().toISOString().slice(0, 10);
