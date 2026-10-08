@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import DOMPurify from "dompurify";
 import { supabase, applyQueries } from "../supabase";
 import { DEFAULT_SETTINGS } from "./content";
@@ -16,23 +16,49 @@ export async function fetchRows(table, queries = []) {
   return data || [];
 }
 
-// Generic list hook: { rows, loading }
-export function useRows(table, queries = []) {
-  const [state, setState] = useState({ rows: [], loading: true });
+// Keeps a piece of data fresh without a page reload:
+//  1. Supabase Realtime pushes a message the moment the admin changes the table (needs supabase/realtime.sql run once);
+//  2. fallback: re-load when the tab gets focus again and every 45 s while the page is visible
+//     (Realtime does not announce rows that just became hidden, and it does nothing until the SQL above is run).
+function useLiveRefresh(table, load) {
   useEffect(() => {
-    let alive = true;
-    fetchRows(table, queries).then(rows => { if (alive) setState({ rows, loading: false }); });
-    return () => { alive = false; };
-    // queries are static per call site
+    let timer;
+    const soon = () => { clearTimeout(timer); timer = setTimeout(load, 300); }; // merge bursts of changes into one reload
+    const channel = supabase
+      .channel(`live-${table}-${Math.random().toString(36).slice(2)}`)
+      .on("postgres_changes", { event: "*", schema: "public", table }, soon)
+      .subscribe();
+    const onVisible = () => { if (document.visibilityState === "visible") soon(); };
+    document.addEventListener("visibilitychange", onVisible);
+    window.addEventListener("focus", soon);
+    const poll = setInterval(() => { if (document.visibilityState === "visible") load(); }, 45000);
+    return () => {
+      clearTimeout(timer); clearInterval(poll);
+      document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("focus", soon);
+      supabase.removeChannel(channel);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [table]);
+}
+
+// Generic list hook: { rows, loading } (updates live)
+export function useRows(table, queries = []) {
+  const [state, setState] = useState({ rows: [], loading: true });
+  const alive = useRef(true);
+  const load = useCallback(() => fetchRows(table, queries).then(rows => { if (alive.current) setState({ rows, loading: false }); }),
+    // queries are static per call site
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [table]);
+  useEffect(() => { alive.current = true; load(); return () => { alive.current = false; }; }, [load]);
+  useLiveRefresh(table, load);
   return state;
 }
 
-// ── Settings (one fetch shared by the whole app) ──
+// ── Settings (shared promise; refreshed live) ──
 let settingsPromise;
-const loadSettings = () => {
-  if (!settingsPromise) {
+const loadSettings = force => {
+  if (!settingsPromise || force) {
     settingsPromise = fetchRows("settings").then(rows => {
       const map = { ...DEFAULT_SETTINGS };
       rows.forEach(r => { if (r.value !== "" || !(r.key in DEFAULT_SETTINGS) || r.key.startsWith("stat_")) map[r.key] = r.value; });
@@ -44,11 +70,14 @@ const loadSettings = () => {
 
 export function useSettings() {
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
+  const alive = useRef(true);
+  const refresh = useCallback(() => loadSettings(true).then(s => { if (alive.current) setSettings(s); }), []);
   useEffect(() => {
-    let alive = true;
-    loadSettings().then(s => { if (alive) setSettings(s); });
-    return () => { alive = false; };
+    alive.current = true;
+    loadSettings(false).then(s => { if (alive.current) setSettings(s); });
+    return () => { alive.current = false; };
   }, []);
+  useLiveRefresh("settings", refresh);
   return settings;
 }
 
