@@ -111,29 +111,6 @@ export function ScrollIndicator() {
   );
 }
 
-// Dot + ring cursor (desktop with a mouse only)
-export function CustomCursor() {
-  const dot = useRef(null);
-  const ring = useRef(null);
-  const [on, setOn] = useState(false);
-  useEffect(() => {
-    if (!finePointer() || reducedMotion()) return;
-    setOn(true);
-    document.body.classList.add("has-cursor");
-    const move = e => {
-      const t = `translate(${e.clientX}px, ${e.clientY}px)`;
-      if (dot.current) dot.current.style.transform = t;
-      if (ring.current) ring.current.style.transform = t;
-      const hot = e.target.closest?.("a, button, summary, select, [role=button]");
-      ring.current?.classList.toggle("hot", !!hot);
-    };
-    window.addEventListener("mousemove", move);
-    return () => { window.removeEventListener("mousemove", move); document.body.classList.remove("has-cursor"); };
-  }, []);
-  if (!on) return null;
-  return (<><div ref={dot} className="cursor-dot" /><div ref={ring} className="cursor-ring" /></>);
-}
-
 // Logo splash shown once per browser session
 export function SplashScreen({ onDone }) {
   useEffect(() => {

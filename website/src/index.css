@@ -279,11 +279,6 @@ a.card:hover, .card.hover:hover { transform: perspective(1000px) rotateX(var(--r
 .rv.rv-in { opacity: 1; translate: 0 0; }
 .card.rv, .member.rv { transition: transform .15s ease-out, border-color .3s ease, opacity .65s ease var(--rv-delay, 0s), translate .65s ease var(--rv-delay, 0s); }
 
-/* Custom cursor (desktop mouse only) */
-body.has-cursor, body.has-cursor a, body.has-cursor button, body.has-cursor summary, body.has-cursor select, body.has-cursor label { cursor: none; }
-.cursor-dot { position: fixed; top: 0; left: 0; width: 8px; height: 8px; margin: -4px 0 0 -4px; background: var(--blue); border-radius: 50%; pointer-events: none; z-index: 99999; transition: transform .08s ease-out; }
-.cursor-ring { position: fixed; top: 0; left: 0; width: 32px; height: 32px; margin: -16px 0 0 -16px; border: 1px solid rgba(255, 255, 255, .35); border-radius: 50%; pointer-events: none; z-index: 99998; transition: transform .15s ease-out, width .2s, height .2s, margin .2s, border-color .2s; }
-.cursor-ring.hot { width: 52px; height: 52px; margin: -26px 0 0 -26px; border-color: var(--blue); }
 
 /* Splash + page transition */
 .splash { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; animation: splashOut 1.7s ease forwards; }
@@ -299,7 +294,7 @@ body.has-cursor, body.has-cursor a, body.has-cursor button, body.has-cursor summ
 @media (prefers-reduced-motion: reduce) {
   .rv, .hero .container > *, .splash, .scroll-wheel { animation: none !important; transition: none !important; opacity: 1 !important; translate: none !important; }
   .split-inner { transition: none; transform: none !important; }
-  .panels, .cursor-dot, .cursor-ring, .particles { display: none; }
+  .panels, .particles { display: none; }
 }
 
 /* Footer wordmark (the header already shows the logo image, so the footer uses text) */
@@ -401,3 +396,7 @@ body.has-cursor, body.has-cursor a, body.has-cursor button, body.has-cursor summ
 /* photos fade in when fully loaded (no half-drawn images while a large file downloads) */
 .team-photo img { opacity: 0; transition: opacity .5s ease, filter .5s ease; }
 .team-photo img.loaded { opacity: 1; }
+
+/* BLUE CURSOR: a normal arrow in the brand blue everywhere (text fields keep the usual text cursor) */
+html, body, a, button, summary, select, label, [role="button"] { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 2l7 19 2.8-7.2L20 11z' fill='%2336A9E1' stroke='white' stroke-width='1.6' stroke-linejoin='round'/></svg>") 3 2, default; }
+input[type="text"], input[type="email"], input[type="tel"], input[type="url"], input[type="search"], input[type="password"], textarea { cursor: text; }

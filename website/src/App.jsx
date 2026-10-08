@@ -3,7 +3,7 @@ import { match, useRouter } from "./lib/router";
 import { useRows, useSettings } from "./lib/data";
 import { Announcement, CookieBanner, Footer, Header, WhatsAppFloat } from "./components/Layout";
 import { Query } from "./supabase";
-import { CustomCursor, SplashScreen, TransitionPanels, reducedMotion, useGlobalFx } from "./components/Fx";
+import { SplashScreen, TransitionPanels, reducedMotion, useGlobalFx } from "./components/Fx";
 import Home from "./pages/Home";
 import { ServiceDetail, ServicesList } from "./pages/Services";
 import { ConceptLab, ProjectDetail, WorkList } from "./pages/Work";
@@ -54,7 +54,6 @@ export default function App() {
 
   return (
     <>
-      <CustomCursor />
       <TransitionPanels />
       {splash && <SplashScreen onDone={endSplash} />}
       <a href="#main" className="skip-link">Skip to content</a>
