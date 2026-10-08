@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "../lib/router";
 import { breadcrumbJsonLd, clean, readTime, SITE_URL, setSeo, useRows, useSettings } from "../lib/data";
-import { FinalCta, Loading, PageHero, Thumb } from "../components/Shared";
+import { EmptyState, FinalCta, Loading, PageHero, Thumb } from "../components/Shared";
 import { Query } from "../supabase";
 
 const usePosts = () => useRows("blog_posts", [Query.equal("published", true), Query.orderDesc("published_at"), Query.limit(100)]);
@@ -22,9 +22,9 @@ export function InsightsList() {
   return (
     <>
       <PageHero eyebrow="Insights" title="Insights for Smarter Growth" intro="Practical thinking on marketing strategy, brand and growth." crumbs={[{ label: "Insights" }]} />
-      <section className="section">
+      <section className="section tight">
         <div className="container">
-          {loading ? <Loading /> : posts.length === 0 ? <p className="lead">New articles are coming soon.</p> : (
+          {loading ? <Loading /> : posts.length === 0 ? <EmptyState title="New articles are coming soon" text="We are preparing practical insights on marketing strategy, brand and growth." action={<Link to="/consultation" className="btn btn-primary">Request a Consultation</Link>} /> : (
             <>
               <div className="chips" style={{ marginBottom: 36 }} role="group" aria-label="Filter by category">
                 {cats.map(c => <button key={c} className={`chip${cat === c ? " active" : ""}`} aria-pressed={cat === c} onClick={() => setCat(c)}>{c}</button>)}

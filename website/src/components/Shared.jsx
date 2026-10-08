@@ -33,6 +33,17 @@ export function SectionHead({ eyebrow, title, intro, center }) {
   );
 }
 
+export function EmptyState({ title, text, action }) {
+  return (
+    <div className="empty-state">
+      <span className="empty-mark" aria-hidden="true">✦</span>
+      <h2>{title}</h2>
+      {text && <p>{text}</p>}
+      {action}
+    </div>
+  );
+}
+
 export function FaqList({ items }) {
   const list = items?.length ? items : FALLBACK_FAQS;
   return (

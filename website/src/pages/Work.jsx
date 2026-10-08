@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "../lib/router";
 import { breadcrumbJsonLd, clean, setSeo, useRows } from "../lib/data";
-import { FinalCta, Loading, PageHero, Thumb } from "../components/Shared";
+import { EmptyState, FinalCta, Loading, PageHero, Thumb } from "../components/Shared";
 import { Query } from "../supabase";
 
 const useProjects = () => useRows("portfolio", [Query.equal("visible", true), Query.orderAsc("sort_order"), Query.orderDesc("created_at"), Query.limit(100)]);
@@ -37,12 +37,12 @@ export function WorkList() {
   return (
     <>
       <PageHero eyebrow="Work" title="Work & Case Studies" intro="Real client work is shown separately from concept projects, which demonstrate our thinking and are never presented as commissioned work." crumbs={[{ label: "Work" }]} />
-      <section className="section">
+      <section className="section tight">
         <div className="container">
           <div className="chips" role="group" aria-label="Filter projects" style={{ marginBottom: 36 }}>
             {filters.map(f => <button key={f} className={`chip${filter === f ? " active" : ""}`} aria-pressed={filter === f} onClick={() => setFilter(f)}>{f}</button>)}
           </div>
-          {loading ? <Loading /> : shown.length ? <div className="grid g3">{shown.map(p => <ProjectCard key={p.id} p={p} />)}</div> : <p className="lead">Projects will be added here soon.</p>}
+          {loading ? <Loading /> : shown.length ? <div className="grid g3">{shown.map(p => <ProjectCard key={p.id} p={p} />)}</div> : <EmptyState title="Projects will be added soon" text="Our featured work and concept projects will appear here." />}
         </div>
       </section>
       <FinalCtaWrap />
