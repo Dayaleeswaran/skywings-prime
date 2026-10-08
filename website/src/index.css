@@ -520,3 +520,15 @@ a.card:hover, .card.hover:hover { border-color: var(--blue); }
 .hero h1 em { background: none; -webkit-text-fill-color: initial; color: inherit; }
 .c-blue { color: var(--blue-ink); }
 .c-gold { color: #B8891E; }
+
+/* LOGO: transparent PNG, shown as an icon (no box) */
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand img, .brand-icon { height: 44px; width: auto; border-radius: 0; background: none; display: block; }
+.brand-text { display: block; font-family: var(--font-head); font-size: 24px; line-height: 1.05; font-weight: 400; color: var(--text); letter-spacing: -.01em; }
+.brand-text em { font-style: italic; color: #B8891E; }
+.brand-text small { display: block; margin-top: 3px; font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-ink); }
+@media (max-width: 960px) { .brand img, .brand-icon { height: 38px; } .brand-text { font-size: 20px; } .brand-text small { font-size: 9px; } }
+.splash-logo img, .reel-brand img, .panel-logo img { border-radius: 0; box-shadow: none; background: none; height: auto; max-width: min(260px, 70vw); }
+.panel-logo img { max-width: min(220px, 60vw); }
+
+.brand img, .brand-icon, .reel-brand img, .splash-logo img { filter: drop-shadow(0 2px 4px rgba(20, 60, 90, 0.22)); }

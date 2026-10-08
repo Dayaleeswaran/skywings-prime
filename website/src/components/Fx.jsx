@@ -119,7 +119,7 @@ export function SplashScreen({ onDone }) {
   }, [onDone]);
   return (
     <div className="splash" role="presentation">
-      <div className="splash-logo"><img src="/logo.png" alt="Sky Wings Prime" width="150" height="140" /></div>
+      <div className="splash-logo"><img src="/logo.png" alt="Sky Wings Prime — Giving you Wings" width="260" height="188" /></div>
       <div className="splash-line" />
     </div>
   );
@@ -133,7 +133,7 @@ export function TransitionPanels() {
       {["#36A9E1", "#D6B25E", "#FFFFFF"].map((c, i) => (
         <div key={i} className="panel-sweep" style={{ background: c, transform: transitioning ? "translateX(0)" : "translateX(-100%)", transitionDelay: `${i * 90}ms` }} />
       ))}
-      <div className="panel-logo" style={{ opacity: transitioning ? 1 : 0 }}><img src="/logo.png" alt="" width="120" height="112" /></div>
+      <div className="panel-logo" style={{ opacity: transitioning ? 1 : 0 }}><img src="/logo.png" alt="" width="220" height="159" /></div>
     </div>
   );
 }

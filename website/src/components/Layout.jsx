@@ -7,7 +7,8 @@ import { Magnetic } from "./Fx";
 export function Brand() {
   return (
     <Link to="/" className="brand" aria-label="Sky Wings Prime — home">
-      <img src="/logo.png" alt="Sky Wings Prime — Giving you Wings" width="68" height="64" />
+      <img className="brand-icon" src="/logo-icon.png" alt="" width="64" height="41" />
+      <span className="brand-text">Sky Wings <em>Prime</em><small>Giving You Wings</small></span>
     </Link>
   );
 }

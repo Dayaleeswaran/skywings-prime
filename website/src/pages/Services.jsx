@@ -39,7 +39,7 @@ export function ServicesList({ s, services, loading }) {
                 {!imageUrl && <div className="fluid" aria-hidden="true"><i /><i /><i /></div>}
                 {!imageUrl && !videoUrl && (
                   <div className="reel-brand">
-                    <img src="/logo.png" alt="" width="150" height="139" />
+                    <img src="/logo.png" alt="" width="260" height="188" />
                     <p>Strategy • Brand • Growth</p>
                   </div>
                 )}

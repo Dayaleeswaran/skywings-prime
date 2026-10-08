@@ -218,11 +218,15 @@ function Modal({ title, subtitle, onClose, children, wide = false }) {
 }
 
 const Logo = ({ size = 20, glow = false }) => (
-  <img src="/logo.png" alt="Sky Wings Prime" draggable={false}
-    style={{
-      height: size * 2.6, width: "auto", borderRadius: size * 0.5, display: "block", userSelect: "none",
-      filter: glow ? `drop-shadow(0 0 15px ${C.brand}55)` : "none"
-    }} />
+  <div style={{
+    display: "flex", alignItems: "center", gap: size * 0.5, userSelect: "none",
+    filter: glow ? `drop-shadow(0 0 15px ${C.brand}55)` : "none"
+  }}>
+    <img src="/logo-icon.png" alt="" draggable={false} style={{ height: size * 1.9, width: "auto", display: "block" }} />
+    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: size * 0.95, fontWeight: 800, color: C.text, letterSpacing: "-0.3px", lineHeight: 1.05 }}>
+      Sky Wings <span style={{ color: "#D6B25E" }}>Prime</span>
+    </span>
+  </div>
 );
 
 // ─────────────────────────────────────────────────────────────────────────────
