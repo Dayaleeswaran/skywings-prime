@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { safeUrl, track } from "../lib/data";
 
 const SOCIALS = [
@@ -11,12 +12,13 @@ const SOCIALS = [
 // the name and role appear over the bottom of the photo and a social bar slides up. Only networks that have a link
 // are shown. On touch screens (no hover) the colour photo, name and bar are always visible.
 export default function TeamCard({ member: m }) {
+  const [loaded, setLoaded] = useState(false);
   const links = SOCIALS.map(([key, label, path]) => ({ key, label, path, url: safeUrl(m[key]) })).filter(l => l.url);
   return (
     <article className={`team-tile${links.length ? " has-links" : ""}`} tabIndex={0} aria-label={m.role ? `${m.name}, ${m.role}` : m.name}>
       <div className="team-photo">
         {m.image_url
-          ? <img src={m.image_url} alt="" loading="lazy" />
+          ? <img src={m.image_url} alt="" loading="lazy" decoding="async" className={loaded ? "loaded" : ""} onLoad={() => setLoaded(true)} />
           : <div className="team-initials" aria-hidden="true">{m.initials || m.name.slice(0, 2).toUpperCase()}</div>}
       </div>
       <div className="team-overlay">

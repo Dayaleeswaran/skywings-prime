@@ -397,3 +397,7 @@ body.has-cursor, body.has-cursor a, body.has-cursor button, body.has-cursor summ
   .team-socials { transform: none; }
 }
 @media (prefers-reduced-motion: reduce) { .team-photo img, .team-overlay, .team-socials { transition: none; } }
+
+/* photos fade in when fully loaded (no half-drawn images while a large file downloads) */
+.team-photo img { opacity: 0; transition: opacity .5s ease, filter .5s ease; }
+.team-photo img.loaded { opacity: 1; }
