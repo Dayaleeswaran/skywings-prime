@@ -564,3 +564,8 @@ a.card:hover, .card.hover:hover { border-color: var(--blue); }
 @keyframes lvColD { 0%, 100% { --fd: #F3D78B; } 33% { --fd: #F8BF72; } 66% { --fd: #FBE6AE; } }
 @media (prefers-reduced-motion: reduce) { .fluid-live i { animation: none !important; } }
 @media (max-width: 700px) { .fluid-live i { filter: blur(48px); } .fluid-live { -webkit-mask-image: linear-gradient(100deg, rgba(0, 0, 0, .55) 0%, #000 60%); mask-image: linear-gradient(100deg, rgba(0, 0, 0, .55) 0%, #000 60%); } }
+
+/* key figures: centred */
+.stats-grid { justify-items: center; }
+.stat { text-align: center; }
+.stat-label { text-align: center; }
