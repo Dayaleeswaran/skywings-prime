@@ -31,7 +31,7 @@ export default function Home({ s, services }) {
   return (
     <>
       <section className="hero">
-        <div className="fluid" aria-hidden="true"><i /><i /><i /></div>
+        <div className="fluid fluid-live" aria-hidden="true"><i /><i /><i /><i /></div>
         <ParticleBackground />
         <GrainOverlay />
         <div className="container">

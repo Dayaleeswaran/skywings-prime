@@ -532,3 +532,35 @@ a.card:hover, .card.hover:hover { border-color: var(--blue); }
 .panel-logo img { max-width: min(220px, 60vw); }
 
 .brand img, .brand-icon, .reel-brand img, .splash-logo img { filter: drop-shadow(0 2px 4px rgba(20, 60, 90, 0.22)); }
+
+/* =====================================================================
+   FLUID LIVE (home hero only): large soft washes of blue and gold that drift AND change colour,
+   like the reference video. Registered colour properties let the browser blend smoothly between shades.
+   ===================================================================== */
+@property --fa { syntax: '<color>'; inherits: true; initial-value: #36A9E1; }
+@property --fb { syntax: '<color>'; inherits: true; initial-value: #D6B25E; }
+@property --fc { syntax: '<color>'; inherits: true; initial-value: #8AD6F7; }
+@property --fd { syntax: '<color>'; inherits: true; initial-value: #F3D78B; }
+
+.fluid-live {
+  --fa: #36A9E1; --fb: #D6B25E; --fc: #8AD6F7; --fd: #F3D78B;
+  /* keep the left (headline) side lighter, colour grows towards the right */
+  -webkit-mask-image: linear-gradient(100deg, rgba(0, 0, 0, .3) 0%, rgba(0, 0, 0, .65) 40%, #000 72%);
+  mask-image: linear-gradient(100deg, rgba(0, 0, 0, .3) 0%, rgba(0, 0, 0, .65) 40%, #000 72%);
+}
+.fluid-live i { top: auto; right: auto; bottom: auto; left: auto; border-radius: 50%; filter: blur(64px); opacity: .85; will-change: transform; }
+.fluid-live i:nth-child(1) { width: 72vmax; height: 72vmax; top: -34%; right: -20%; background: radial-gradient(circle, var(--fa) 0%, transparent 68%); animation: lvMove1 15s ease-in-out infinite alternate, lvColA 11s ease-in-out infinite; }
+.fluid-live i:nth-child(2) { width: 62vmax; height: 62vmax; bottom: -38%; right: 6%; background: radial-gradient(circle, var(--fb) 0%, transparent 68%); animation: lvMove2 18s ease-in-out infinite alternate, lvColB 13s ease-in-out infinite; }
+.fluid-live i:nth-child(3) { width: 56vmax; height: 56vmax; bottom: -34%; left: -22%; background: radial-gradient(circle, var(--fc) 0%, transparent 68%); animation: lvMove3 20s ease-in-out infinite alternate, lvColC 14s ease-in-out infinite; }
+.fluid-live i:nth-child(4) { width: 50vmax; height: 50vmax; top: -26%; left: 24%; background: radial-gradient(circle, var(--fd) 0%, transparent 68%); animation: lvMove4 22s ease-in-out infinite alternate, lvColD 16s ease-in-out infinite; }
+@keyframes lvMove1 { 0% { transform: translate(0, 0) scale(1) rotate(0deg); } 50% { transform: translate(-16vw, 12vh) scale(1.18) rotate(40deg); } 100% { transform: translate(-6vw, 26vh) scale(.92) rotate(90deg); } }
+@keyframes lvMove2 { 0% { transform: translate(0, 0) scale(1.05); } 50% { transform: translate(-22vw, -10vh) scale(.86); } 100% { transform: translate(8vw, -22vh) scale(1.22); } }
+@keyframes lvMove3 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(22vw, -16vh) scale(1.25); } 100% { transform: translate(8vw, -4vh) scale(.9); } }
+@keyframes lvMove4 { 0% { transform: translate(0, 0) scale(.95); } 50% { transform: translate(26vw, 16vh) scale(1.2); } 100% { transform: translate(-12vw, 24vh) scale(1); } }
+/* colour cycles: blue family and gold family, each wash on its own rhythm so the mix keeps changing */
+@keyframes lvColA { 0%, 100% { --fa: #36A9E1; } 33% { --fa: #63D3F8; } 66% { --fa: #2A7FD8; } }
+@keyframes lvColB { 0%, 100% { --fb: #D6B25E; } 33% { --fb: #F6C768; } 66% { --fb: #F2A765; } }
+@keyframes lvColC { 0%, 100% { --fc: #8AD6F7; } 33% { --fc: #4FB3EC; } 66% { --fc: #B3E3F8; } }
+@keyframes lvColD { 0%, 100% { --fd: #F3D78B; } 33% { --fd: #F8BF72; } 66% { --fd: #FBE6AE; } }
+@media (prefers-reduced-motion: reduce) { .fluid-live i { animation: none !important; } }
+@media (max-width: 700px) { .fluid-live i { filter: blur(48px); } .fluid-live { -webkit-mask-image: linear-gradient(100deg, rgba(0, 0, 0, .55) 0%, #000 60%); mask-image: linear-gradient(100deg, rgba(0, 0, 0, .55) 0%, #000 60%); } }
