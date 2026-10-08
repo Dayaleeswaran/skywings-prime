@@ -9,7 +9,10 @@ if (!url || !anonKey) {
 
 export const supabase = createClient(url || "http://localhost:54321", anonKey || "missing-anon-key");
 
-export const SITE_URL = (import.meta.env.VITE_SITE_URL || "http://localhost:5173").replace(/\/+$/, "");
+// Public website address (used by the "View Website" link). When the variable is missing the link points to the local site
+// during development and is hidden in production, so it can never send someone to a localhost address.
+const isLocalAdmin = typeof window !== "undefined" && ["localhost", "127.0.0.1"].includes(window.location.hostname);
+export const SITE_URL = (import.meta.env.VITE_SITE_URL || (isLocalAdmin ? "http://localhost:5177" : "")).replace(/\/+$/, "");
 export const BUCKET = "uploads";
 
 // Query helpers: dbList("services", [Query.orderAsc("sort_order"), Query.limit(100)])

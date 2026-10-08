@@ -490,12 +490,14 @@ function Sidebar({ active, setActive, unread, onSignOut }) {
 
       {/* Footer */}
       <div style={{ padding: "14px 10px 16px", borderTop: `1px solid ${C.border}` }}>
-        <a href={SITE_URL} target="_blank" rel="noopener noreferrer"
-          style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "9px 12px", borderRadius: 7, border: "none", cursor: "pointer", background: "transparent", color: C.brand, fontSize: 13, transition: "all 0.12s", marginBottom: 4 }}
-          onMouseEnter={e => e.currentTarget.style.background = C.brandGlow}
-          onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
-          <span>🌐</span> View Website
-        </a>
+        {SITE_URL && (
+          <a href={SITE_URL} target="_blank" rel="noopener noreferrer"
+            style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "9px 12px", borderRadius: 7, border: "none", cursor: "pointer", background: "transparent", color: C.brand, fontSize: 13, transition: "all 0.12s", marginBottom: 4 }}
+            onMouseEnter={e => e.currentTarget.style.background = C.brandGlow}
+            onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
+            <span>🌐</span> View Website
+          </a>
+        )}
         <button onClick={onSignOut}
           style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "9px 12px", borderRadius: 7, border: "none", cursor: "pointer", background: "transparent", color: C.muted, fontSize: 13, transition: "all 0.12s" }}
           onMouseEnter={e => e.currentTarget.style.color = "#F87171"}
