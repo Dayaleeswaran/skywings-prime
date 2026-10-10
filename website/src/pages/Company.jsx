@@ -113,6 +113,7 @@ export function Contact({ s }) {
             <li><b>Phone</b><a href={`tel:${s.phone.replace(/\s/g, "")}`} onClick={() => track("phone_click")}>{s.phone}</a>{s.phone_2 && <><br /><a href={`tel:${s.phone_2.replace(/\s/g, "")}`} onClick={() => track("phone_click")}>{s.phone_2}</a></>}</li>
             <li><b>WhatsApp</b>
               <a href={waLink(s.whatsapp_uae, "Hello Sky Wings Prime")} target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click")}>UAE: {s.whatsapp_uae}</a>
+              {digits(s.whatsapp_2) && <><br /><a href={waLink(s.whatsapp_2, "Hello Sky Wings Prime")} target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click")}>UAE (2nd number): {s.whatsapp_2}</a></>}
               {digits(s.whatsapp_sl) && <><br /><a href={waLink(s.whatsapp_sl, "Hello Sky Wings Prime")} target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click")}>Sri Lanka: {s.whatsapp_sl}</a></>}
             </li>
             <li><b>Email</b><a href={`mailto:${s.email}`} onClick={() => track("email_click")}>{s.email}</a></li>

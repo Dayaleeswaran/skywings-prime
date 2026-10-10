@@ -1685,7 +1685,7 @@ const SETTING_GROUPS = [
   { title: "📞 Contact Details", note: "Used by the footer, Contact page, WhatsApp buttons, structured data and legal pages.", fields: [
     ["address", "Office address", "232, Muhaisnah, Dubai, UAE"], ["phone_2", "Second phone (optional)", "+971 54 724 9877"],
     ["phone", "Main phone", "+971 50 527 3277"], ["email", "Public email", "info@..."],
-    ["whatsapp_uae", "WhatsApp — UAE", "+971 50 527 3277"], ["whatsapp_sl", "WhatsApp — Sri Lanka (optional)", "+94 74 041 5234"],
+    ["whatsapp_uae", "WhatsApp — UAE", "+971 50 527 3277"], ["whatsapp_2", "WhatsApp — second UAE number (optional)", "+971 54 724 9877"], ["whatsapp_sl", "WhatsApp — Sri Lanka (optional)", "+94 74 041 5234"],
     ["privacy_email", "Privacy contact email", "info@..."],
     ["lead_reply_account", "Gmail account used for lead replies (optional)", "info@yourdomain.com"] ] },
   { title: "🔗 Social Links", note: "Leave blank to hide an icon (for example TikTok until it exists).", fields: [

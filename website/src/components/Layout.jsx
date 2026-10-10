@@ -117,6 +117,7 @@ export function WhatsAppFloat({ s }) {
   const msg = `Hello Sky Wings Prime, I'd like to know more${path !== "/" ? ` about: ${document.title.split("|")[0].trim()}` : ""}.`;
   const options = [
     s.whatsapp_uae && { label: "UAE", number: s.whatsapp_uae },
+    s.whatsapp_2 && { label: "UAE · 2nd number", number: s.whatsapp_2 },
     s.whatsapp_sl && { label: "Sri Lanka", number: s.whatsapp_sl },
   ].filter(Boolean);
   if (!options.length) return null;

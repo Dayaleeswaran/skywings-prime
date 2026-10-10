@@ -12,6 +12,7 @@ export const DEFAULT_SETTINGS = {
   email: "info@skywinsgholdings.com",
   privacy_email: "info@skywinsgholdings.com",
   phone_2: "+971 54 724 9877",
+  whatsapp_2: "+971 54 724 9877",
   media_permit_no: "6595801",
   social_instagram: "https://www.instagram.com/skywings_prime",
   social_facebook: "https://www.facebook.com/SkyWingsPrime",
