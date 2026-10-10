@@ -28,14 +28,14 @@ async function rows(table, filter, cols) {
   } catch { return []; }
 }
 
-const settingsRows = await rows("settings", "key=in.(brand_name,legal_name,phone,email,address,social_instagram,social_facebook,social_linkedin,social_tiktok)", "key,value");
+const settingsRows = await rows("settings", "key=in.(brand_name,legal_name,phone,phone_2,email,address,social_instagram,social_facebook,social_linkedin,social_tiktok)", "key,value");
 const S = Object.fromEntries(settingsRows.map(r => [r.key, r.value]));
 const legalName = S.legal_name || "Skywings Prime Marketing Management";
 const sameAs = [S.social_instagram, S.social_facebook, S.social_linkedin, S.social_tiktok].filter(v => /^https?:\/\//.test(v || ""));
 
 const org = {
   "@context": "https://schema.org", "@type": "ProfessionalService", name: legalName, alternateName: S.brand_name || "Sky Wings Prime",
-  slogan: "Giving You Wings", url: SITE, telephone: S.phone || "+971 50 527 3277", email: S.email || undefined,
+  slogan: "Giving You Wings", url: SITE, telephone: [S.phone || "+971 50 527 3277", S.phone_2 || "+971 54 724 9877"], email: S.email || undefined,
   address: { "@type": "PostalAddress", streetAddress: S.address || "232, Muhaisnah, Dubai, UAE", addressCountry: "AE" }, sameAs,
 };
 const crumbs = items => ({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: items.map((it, i) => ({ "@type": "ListItem", position: i + 1, name: it.name, item: SITE + it.path })) });

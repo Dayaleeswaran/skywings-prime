@@ -34,7 +34,7 @@ export function About({ s }) {
           <ul className="pill-list">{PRINCIPLES.map(p => <li key={p}>{p}</li>)}</ul>
           <div className="split" style={{ marginTop: 64 }}>
             <div><h3 className="gold">International Context</h3><p className="lead">Our operational base is Dubai. Through our association with Sky Wings Holdings in Sri Lanka, we draw on an understanding of Middle Eastern market behaviour, South Asian business environments and international customer expectations.</p></div>
-            <div className="card"><h3>Licence</h3><p>Main License No. <b style={{ color: "var(--text)" }}>{s.license_no}</b><br />{s.legal_name}<br />{s.address}</p></div>
+            <div className="card"><h3>Media permit</h3><p>National Media Council Permit No. <b style={{ color: "var(--text)" }}>{s.media_permit_no}</b><br />{s.legal_name}<br />{s.address}</p></div>
           </div>
         </div>
       </section>
@@ -110,15 +110,13 @@ export function Contact({ s }) {
           <div className="panel"><LeadForm type="contact" /></div>
           <ul className="contact-list">
             <li><b>Address</b>{s.address}</li>
-            <li><b>Phone</b><a href={`tel:${s.phone.replace(/\s/g, "")}`} onClick={() => track("phone_click")}>{s.phone}</a></li>
+            <li><b>Phone</b><a href={`tel:${s.phone.replace(/\s/g, "")}`} onClick={() => track("phone_click")}>{s.phone}</a>{s.phone_2 && <><br /><a href={`tel:${s.phone_2.replace(/\s/g, "")}`} onClick={() => track("phone_click")}>{s.phone_2}</a></>}</li>
             <li><b>WhatsApp</b>
               <a href={waLink(s.whatsapp_uae, "Hello Sky Wings Prime")} target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click")}>UAE: {s.whatsapp_uae}</a>
               {digits(s.whatsapp_sl) && <><br /><a href={waLink(s.whatsapp_sl, "Hello Sky Wings Prime")} target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click")}>Sri Lanka: {s.whatsapp_sl}</a></>}
             </li>
             <li><b>Email</b><a href={`mailto:${s.email}`} onClick={() => track("email_click")}>{s.email}</a></li>
-            <li><b>Business hours</b>{s.business_hours}</li>
-            <li><b>License</b>No. {s.license_no}</li>
-            <li><b>Map</b><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.address)}`} target="_blank" rel="noopener noreferrer">Open in Google Maps →</a></li>
+            <li><b>Media permit</b>National Media Council Permit No. {s.media_permit_no}</li>
           </ul>
         </div>
       </section>

@@ -23,7 +23,7 @@ Until this is set up, new leads are only visible in Admin → Leads.
 
 ## 3. What is built
 - **Website** (animated look: serif headings, particle/fluid hero, scroll reveals, tilt cards, magnetic buttons, custom cursor, page transitions, splash; Skywings blue + gold, real logo + bird favicon): Home (all spec sections), About, Services + 10 service pages, Work, Concept Lab, case-study pages, Events, Team, Insights + articles, FAQ, Contact, Consultation, 5 legal pages, thank-you, 404.
-- **Global**: announcement bar, sticky header, floating WhatsApp (UAE / Sri Lanka, prefilled text), footer with licence no., cookie banner (analytics/marketing load only after consent), skip link, reduced-motion support.
+- **Global**: announcement bar, sticky header, floating WhatsApp (UAE / Sri Lanka, prefilled text), footer with the media permit no., cookie banner (analytics/marketing load only after consent), skip link, reduced-motion support.
 - **SEO**: per-page title / description / canonical / Open Graph, JSON-LD (ProfessionalService, Service, Article, Breadcrumb, FAQ), sitemap, robots, static per-route HTML for crawlers and link previews.
 - **Forms**: validation, consent checkbox + timestamp, honeypot, double-submit + cooldown, **server-side rate limit (3 per e-mail per hour, 60 per hour overall), link and e-mail checks**.
 - **Admin** (logo + favicon): Services, Work & Concepts (real vs concept), Insights (drafts, slug, SEO), Team, Clients, Testimonials, FAQs, **Leads CRM** (status, notes, filters, search, CSV export), **Site Settings** (company data, socials, announcement, tracking IDs, 5 legal pages).
@@ -36,4 +36,4 @@ Until this is set up, new leads are only visible in Admin → Leads.
 - Legal wording must be reviewed by a legal adviser.
 
 ## 5. Pending client confirmations (spec section 39)
-Official e-mail · team role for Buddika Chandra Wijewardhana (blank, not shown) · existing client brand · event photos · TikTok URL · Sky Wings Holdings wording · map pin · governing law.
+Official e-mail · team role for Buddika Chandra Wijewardhana (blank, not shown) · existing client brand · event photos · TikTok URL · Sky Wings Holdings wording · governing law.

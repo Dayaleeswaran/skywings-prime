@@ -93,9 +93,9 @@ export function Footer({ s, services, onCookieSettings }) {
             <ul className="muted">
               <li>{s.address}</li>
               <li><a href={`tel:${s.phone.replace(/\s/g, "")}`} onClick={() => track("phone_click")}>{s.phone}</a></li>
+              {s.phone_2 && <li><a href={`tel:${s.phone_2.replace(/\s/g, "")}`} onClick={() => track("phone_click")}>{s.phone_2}</a></li>}
               <li><a href={`mailto:${s.email}`} onClick={() => track("email_click")}>{s.email}</a></li>
-              <li>{s.business_hours}</li>
-              <li>License No. {s.license_no}</li>
+              {s.media_permit_no && <li>National Media Council Permit No. {s.media_permit_no}</li>}
             </ul>
           </div>
         </div>

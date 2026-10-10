@@ -179,7 +179,7 @@ export const orgJsonLd = settings => ({
   alternateName: settings.brand_name,
   slogan: settings.tagline,
   url: SITE_URL,
-  telephone: settings.phone,
+  telephone: [settings.phone, settings.phone_2].filter(Boolean),
   email: settings.email,
   address: { "@type": "PostalAddress", streetAddress: settings.address, addressCountry: "AE" },
   sameAs: [settings.social_instagram, settings.social_facebook, settings.social_linkedin, settings.social_tiktok].map(safeUrl).filter(Boolean),
